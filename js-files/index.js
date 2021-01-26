@@ -1,6 +1,7 @@
 const roundSetup = document.getElementById('round-setup')
 const mainDiv =document.getElementById('main-div')
 const holesDiv = document.getElementById('holes-div')
+const summaryDiv = document.getElementById('summary')
 
 
 roundSetup.addEventListener('submit', function(e){
@@ -79,6 +80,8 @@ roundSetup.addEventListener('submit', function(e){
                 }
               });
             }
+
+            summaryDiv.innerHTML = `<button data-round=${holes[0].round_id} type='button'>Finalize Round</button>`
             
             // let button;
             // for(let i =0; i < holes.length; i++){
@@ -177,7 +180,7 @@ holesDiv.addEventListener('submit', function(e){
         let parent =e.target.parentNode
         parent.style.display = 'none'
         let grandparent = parent.previousElementSibling
-        grandparent.innerHTML = `Hole ${grandparent.dataset.holeNum} score:${hole.score}`
+        grandparent.innerHTML = `Hole ${grandparent.dataset.holeNum} score: ${hole.score}`
 
     })
 })
