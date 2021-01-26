@@ -2,10 +2,19 @@
 <html>
 <head>
   <title>myRound</title>
+  <script defer src='js-files/round.js'></script>
   <script defer src='js-files/index.js'></script>
 </head>
 <body id='main-body'>
-Hello world
+<h1 id='title'>Welcome to myRound</h1>
+<div id='main-div'>
+    <p>This application is desgined to give you vital information on your round. To start selet how many hole you will play this round. This will setup the holes for you to add infomration on. Click on each hole to add detials. Once you've completed your round click on summary to get see your stats!</p>
+    <form id='round-setup'>
+    <label>How many holes?</label> 
+    <input type ='number', name='num_of_holes'> 
+    <input type='submit' value="Let's Play Some Golf">
+    </form>
+</div>
 
 </body>
 </html>
