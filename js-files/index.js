@@ -14,11 +14,11 @@ roundSetup.addEventListener('submit', function(e){
             num_of_holes: e.target.num_of_holes.value
         })
     }).then(resp => resp.json()).then(function(round){
-        let newRound = new Round(round.id, round.score, round.gir, round.fir, round.num_of_holes)
-        mainDiv.innerHTML = ''
-        for(let i =0; i < newRound.num_of_holes; i++){
-            mainDiv.innerHTML += `<div data-hole=${i+1} class='hole'>Hole ${i+1} score:__<div>`
-        }
+        // let newRound = new Round(round.id, round.score, round.gir, round.fir, round.num_of_holes)
+        // mainDiv.innerHTML = ''
+        // for(let i =0; i < newRound.num_of_holes; i++){
+        //     mainDiv.innerHTML += `<div data-hole=${i+1} class='hole'>Hole ${i+1} score:__<div>`
+        // }
         return round
     }).then(function(round){
         fetch(`http://localhost:3000/rounds/${round.id}/holes`,{
@@ -30,6 +30,13 @@ roundSetup.addEventListener('submit', function(e){
                 num_of_holes: round.num_of_holes,
                 round_id: round.id
             })
+        }).then(resp => resp.json()).then(function(holes){
+            console.log(holes)
+            mainDiv.innerHTML = ''
+            for(let i =0; i < holes.length; i++){
+            mainDiv.innerHTML += `<div data-hole=${holes[i].id} class='hole'>Hole ${i+1} score:__<div>`
+            }
+
         })
     })
     
