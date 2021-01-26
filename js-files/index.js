@@ -53,6 +53,8 @@ roundSetup.addEventListener('submit', function(e){
                         <span><img src='https://i.pinimg.com/564x/ec/17/22/ec1722fc44678bff1d60194f357e3769.jpg' alt='green' width='350' height='350'>
                         <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAACvCAMAAABqzPMLAAAAeFBMVEX///8AAAB4eHjy8vJWVlZ8e3w4ODju7u4NAAA8AAC7vL3p6em3uLn4+fmws7NYTE1xb28aAABkX1+qq6vNAAB8AAClAgRtAABrcHBWUVF1AABHAQRkAADT1dXh4uI7OzswAgQqAAAiAAC2AgSZAAAzAACZm5vGxscANfV+AAAB2klEQVR4nO3Uy04UQQCG0SlHZBgFkVEuXsAb+v5v6ErSTUi+jUm34Zxd7f58qarNBoDV279eesG6vDmdn892b49e8OD83cVh2me/e/9hMHF5dT0NdHzz8dPSk9bl88mX2RM7GuN2y1+nr8bYPA60/Ydf3H/vqUDHy0xZJ4GCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGg8FSg7TJT1unuUaDtxcnXwcS377fTQPvx42rpSety+fN6doXOd+PmJQ/G/f2vWaDfh/n5uTs7HJaeAM/DH3j5H6NdRWy2AAAAAElFTkSuQmCC' alt='fairway' width='350' height='350'>
                         </span>
+                        <label>Par</label>
+                        <input type='number' name='par' value = ${holes[i].par ? holes[i].par : 0}>
                         <label>Putts</label>
                         <input type='number' name='putts' value = ${holes[i].putts ? holes[i].putts : 0}>
                         <label>Score</label>
@@ -160,7 +162,7 @@ holesDiv.addEventListener('submit', function(e){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-
+            par: e.target.par.value,
             score: e.target.score.value,
             putts: e.target.putts.value
 
@@ -171,6 +173,8 @@ holesDiv.addEventListener('submit', function(e){
         <span><img src='https://i.pinimg.com/564x/ec/17/22/ec1722fc44678bff1d60194f357e3769.jpg' alt='green' width='350' height='350'>
         <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAACvCAMAAABqzPMLAAAAeFBMVEX///8AAAB4eHjy8vJWVlZ8e3w4ODju7u4NAAA8AAC7vL3p6em3uLn4+fmws7NYTE1xb28aAABkX1+qq6vNAAB8AAClAgRtAABrcHBWUVF1AABHAQRkAADT1dXh4uI7OzswAgQqAAAiAAC2AgSZAAAzAACZm5vGxscANfV+AAAB2klEQVR4nO3Uy04UQQCG0SlHZBgFkVEuXsAb+v5v6ErSTUi+jUm34Zxd7f58qarNBoDV279eesG6vDmdn892b49e8OD83cVh2me/e/9hMHF5dT0NdHzz8dPSk9bl88mX2RM7GuN2y1+nr8bYPA60/Ydf3H/vqUDHy0xZJ4GCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGg8FSg7TJT1unuUaDtxcnXwcS377fTQPvx42rpSety+fN6doXOd+PmJQ/G/f2vWaDfh/n5uTs7HJaeAM/DH3j5H6NdRWy2AAAAAElFTkSuQmCC' alt='fairway' width='350' height='350'>
         </span>
+        <label>Par</label>
+        <input type='number' name='par' value = ${hole.par ? hole.par : 0}>
         <label>Putts</label>
         <input type='number' name='putts' value = ${hole.putts ? hole.putts : 0}>
         <label>Score</label>
@@ -182,5 +186,12 @@ holesDiv.addEventListener('submit', function(e){
         let grandparent = parent.previousElementSibling
         grandparent.innerHTML = `Hole ${grandparent.dataset.holeNum} score: ${hole.score}`
 
+    })
+})
+
+
+summaryDiv.addEventListener('click', function(e){
+    fetch(`http://localhost:3000/rounds/${e.target.dataset.round}/summary`).then(resp => resp.json()).then(function(summary){
+        console.log(summary)
     })
 })
