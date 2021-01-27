@@ -24,6 +24,17 @@
           overflow: hidden;
           background-color: #f1f1f1;
         }
+
+
+
+
+        .dot {
+    height: 2px;
+    width: 2px;
+    position: absolute;
+    border: 2px solid red;
+    z-index: 10;
+}
         </style>
   <title>myRound</title>
   <script defer src='js-files/round.js'></script>
@@ -45,7 +56,59 @@
 <br>
 <br>
 <div id='summary'></div>
+<div id='image'>
+<span><img id='gir' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'>
+    <img id='fir' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'>
+    </span>
+</div>
+<p>X:<span id="x"></span></p>
+<p>Y:<span id="y"></span></p>
 
 
+<!-- <script type="text/javascript">
+    function FindPosition(oElement)
+    {
+      if(typeof( oElement.offsetParent ) != "undefined")
+      {
+        for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+        {
+          posX += oElement.offsetLeft;
+          posY += oElement.offsetTop;
+        }
+          return [ posX, posY ];
+        }
+        else
+        {
+          return [ oElement.x, oElement.y ];
+        }
+    }
+    
+    function GetCoordinates(e)
+    {
+      var PosX = 0;
+      var PosY = 0;
+      var ImgPos;
+      ImgPos = FindPosition(gir);
+      if (!e) var e = window.event;
+      if (e.pageX || e.pageY)
+      {
+        PosX = e.pageX;
+        PosY = e.pageY;
+      }
+      else if (e.clientX || e.clientY)
+        {
+          PosX = e.clientX + document.body.scrollLeft
+            + document.documentElement.scrollLeft;
+          PosY = e.clientY + document.body.scrollTop
+            + document.documentElement.scrollTop;
+        }
+      PosX = PosX;
+      PosY = PosY;
+      document.getElementById("x").innerHTML = PosX;
+      document.getElementById("y").innerHTML = PosY;
+    }
+    
+    //-->
+    <!-- </script> --> -->
 </body>
 </html>
