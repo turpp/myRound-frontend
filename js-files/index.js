@@ -50,8 +50,8 @@ roundSetup.addEventListener('submit', function(e){
                 holesDiv.appendChild(div)
                     div.innerHTML =`
                         <form data-hole=${holes[i].id} id='hole-form'>
-                        <span><img src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'>
-                        <img src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'>
+                        <span><img id='gir-hole-${i+1}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'>
+                        <img id='fir-hole-${i+1}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'>
                         </span>
                         <label>Par</label>
                         <input type='number' name='par' value = ${holes[i].par ? holes[i].par : 0}>
@@ -63,6 +63,8 @@ roundSetup.addEventListener('submit', function(e){
                         </form>
                         <br>
                         `
+                        document.getElementById(`gir-hole-${i+1}`).onmousedown = GetCoordinates
+                        document.getElementById(`fir-hole-${i+1}`).onmousedown = GetCoordinates
 
 
 
@@ -259,6 +261,15 @@ function loc(array){
     div.style.left = array[0] + 'px';
     div.style.top = array[1] + 'px';
     document.getElementById('image').appendChild(div)
+}
+
+function placeDot(array){
+    let div = document.createElement('div');
+    div.className = 'dot';
+    div.style.left = array[0] + 'px';
+    div.style.top = array[1] + 'px';
+    document.getElementById('image').appendChild(div)
+
 }
 gir.onmousedown = GetCoordinates
 fir.onmousedown = GetCoordinates
