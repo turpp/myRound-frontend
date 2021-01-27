@@ -42,6 +42,7 @@ roundSetup.addEventListener('submit', function(e){
                 button.type = 'button'
                 button.className = "collapsible"
                 button.dataset.holeNum = i+1
+                button.dataset.id = holes[i].id
                 holesDiv.appendChild(button)
                 button.innerHTML = `Hole ${i+1} score:__`
                 
@@ -50,9 +51,8 @@ roundSetup.addEventListener('submit', function(e){
                 holesDiv.appendChild(div)
                     div.innerHTML =`
                         <form data-hole=${holes[i].id} id='hole-form'>
-                        <span><img id='gir-hole-${i+1}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'>
-                        <img id='fir-hole-${i+1}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'>
-                        </span>
+                        <div id='gir-hole-${i+1}'> <img id='gir-hole-${i+1}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'></div>
+                        <div id='fir-hole-${i+1}'> <img id='fir-hole-${i+1}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'></div>
                         <label>Par</label>
                         <input type='number' name='par' value = ${holes[i].par ? holes[i].par : 0}>
                         <label>Putts</label>
@@ -78,6 +78,7 @@ roundSetup.addEventListener('submit', function(e){
                 this.classList.toggle("active");
                 let content = this.nextElementSibling;
                 if (content.style.display === "block") {
+                    removeDot()
                   content.style.display = "none";
                 } else {
                   content.style.display = "block";
@@ -183,6 +184,7 @@ holesDiv.addEventListener('submit', function(e){
         <input type='number' name='score' value = ${hole.score ? hole.score : 0}>
         <input type='submit' value='Submit Hole'>
         `
+        removeDot()
         let parent =e.target.parentNode
         parent.style.display = 'none'
         let grandparent = parent.previousElementSibling
@@ -229,10 +231,11 @@ function FindPosition(oElement)
 }
 
 function GetCoordinates(e)
+
 {
   var PosX = 0;
   var PosY = 0;
-  var ImgPos;
+//   var ImgPos;
 //   ImgPos = FindPosition(gir);
   if (!e) var e = window.event;
   if (e.pageX || e.pageY)
@@ -252,24 +255,29 @@ function GetCoordinates(e)
   let array =[PosX, PosY]
   document.getElementById("x").innerHTML = PosX;
   document.getElementById("y").innerHTML = PosY;
-  loc(array)
+  console.log(window.event.path[1].id)
+  let oldDot = document.querySelectorAll(`#${window.event.path[1].id} .dot`)
+  oldDot.forEach(function(dot){
+      dot.remove()
+  })
+  placeDot(array, e.path[1])
 }
 
-function loc(array){
+
+function placeDot(array,location){
     let div = document.createElement('div');
     div.className = 'dot';
     div.style.left = array[0] + 'px';
     div.style.top = array[1] + 'px';
-    document.getElementById('image').appendChild(div)
+    location.appendChild(div)
+   
+
 }
 
-function placeDot(array){
-    let div = document.createElement('div');
-    div.className = 'dot';
-    div.style.left = array[0] + 'px';
-    div.style.top = array[1] + 'px';
-    document.getElementById('image').appendChild(div)
-
+function removeDot(){
+    document.querySelectorAll('.dot').forEach(function(el){
+        el.remove()
+    })
 }
 gir.onmousedown = GetCoordinates
 fir.onmousedown = GetCoordinates
