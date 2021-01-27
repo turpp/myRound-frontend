@@ -178,7 +178,19 @@ holesDiv.addEventListener('submit', function(e){
         // removeDot()
         //going to hide dots
         let girDot = document.querySelectorAll(`#gir-hole-${grandparent.dataset.holeNum} .dot`)
-        girDot.forEach(dot => dot.style.display = 'none')
+        let firDot =document.querySelectorAll(`#fir-hole-${grandparent.dataset.holeNum} .dot`)
+        // girDot.forEach(dot => console.log(dot.style.top))
+        // firDot.forEach(dot => console.log(dot.style.left))
+        let yGirDot = girDot[0].style.top
+        let xGirDot = girDot[0].style.left
+        let xFirDot = firDot[0].style.left
+        let yFirDot = firDot[0].style.top
+        let dotObj = {
+            girDot: [xGirDot.split('px')[0], yGirDot.split('px')[0]],
+            firDot: [xFirDot.split('px')[0], yFirDot.split('px')[0]]
+        }
+        console.log(dotObj)
+        
 
         //
 
@@ -196,6 +208,8 @@ holesDiv.addEventListener('submit', function(e){
         `
         document.getElementById(`gir-hole-${grandparent.dataset.holeNum}`).onmousedown = GetCoordinates
         document.getElementById(`fir-hole-${grandparent.dataset.holeNum}`).onmousedown = GetCoordinates
+        placeDot(dotObj.girDot, document.getElementById(`gir-hole-${grandparent.dataset.holeNum}`))
+        placeDot(dotObj.firDot, document.getElementById(`fir-hole-${grandparent.dataset.holeNum}`))
 
     })
 })
