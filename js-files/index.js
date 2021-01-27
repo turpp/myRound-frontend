@@ -33,7 +33,6 @@ roundSetup.addEventListener('submit', function(e){
                 round_id: round.id
             })
         }).then(resp => resp.json()).then(function(holes){
-            console.log(holes)
             mainDiv.innerHTML = ''
             let button;
             let div;
@@ -78,7 +77,7 @@ roundSetup.addEventListener('submit', function(e){
                 this.classList.toggle("active");
                 let content = this.nextElementSibling;
                 if (content.style.display === "block") {
-                    removeDot()
+                    console.log(document.querySelectorAll(`#${this.nextElementSibling.childNodes[1].id} .dot`))
                   content.style.display = "none";
                 } else {
                   content.style.display = "block";
@@ -171,12 +170,23 @@ holesDiv.addEventListener('submit', function(e){
 
         })
     }).then(resp=> resp.json()).then(function(hole){
-        console.log(hole)
+        let parent =e.target.parentNode
+        parent.style.display = 'none'
+        let grandparent = parent.previousElementSibling
+        grandparent.innerHTML = `Hole ${grandparent.dataset.holeNum} score: ${hole.score}`
+
+        // removeDot()
+        //going to hide dots
+        let girDot = document.querySelectorAll(`#gir-hole-${grandparent.dataset.holeNum} .dot`)
+        girDot.forEach(dot => dot.style.display = 'none')
+
+        //
+
+
         e.target.innerHTML = `
-        <span><img src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'>
-        <img src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'>
-        </span>
-        <label>Par</label>
+        <div id='gir-hole-${grandparent.dataset.holeNum}'> <img id='gir-hole-${grandparent.dataset.holeNum}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'></div>
+        <div id='fir-hole-${grandparent.dataset.holeNum}'> <img id='fir-hole-${grandparent.dataset.holeNum}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'></div>
+<label>Par</label>
         <input type='number' name='par' value = ${hole.par ? hole.par : 0}>
         <label>Putts</label>
         <input type='number' name='putts' value = ${hole.putts ? hole.putts : 0}>
@@ -184,11 +194,8 @@ holesDiv.addEventListener('submit', function(e){
         <input type='number' name='score' value = ${hole.score ? hole.score : 0}>
         <input type='submit' value='Submit Hole'>
         `
-        removeDot()
-        let parent =e.target.parentNode
-        parent.style.display = 'none'
-        let grandparent = parent.previousElementSibling
-        grandparent.innerHTML = `Hole ${grandparent.dataset.holeNum} score: ${hole.score}`
+        document.getElementById(`gir-hole-${grandparent.dataset.holeNum}`).onmousedown = GetCoordinates
+        document.getElementById(`fir-hole-${grandparent.dataset.holeNum}`).onmousedown = GetCoordinates
 
     })
 })
@@ -196,7 +203,6 @@ holesDiv.addEventListener('submit', function(e){
 
 summaryDiv.addEventListener('click', function(e){
     fetch(`http://localhost:3000/rounds/${e.target.dataset.round}/summary`).then(resp => resp.json()).then(function(summary){
-        console.log(summary)
         summaryDiv.innerHTML = `
         <h1> Round Summary</h1>
         <h3>Score: ${summary.score}</h3>
@@ -255,7 +261,6 @@ function GetCoordinates(e)
   let array =[PosX, PosY]
   document.getElementById("x").innerHTML = PosX;
   document.getElementById("y").innerHTML = PosY;
-  console.log(window.event.path[1].id)
   let oldDot = document.querySelectorAll(`#${window.event.path[1].id} .dot`)
   oldDot.forEach(function(dot){
       dot.remove()
