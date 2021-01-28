@@ -161,8 +161,8 @@ holesDiv.addEventListener('submit', function(e){
     let firId = window.event.path[0].childNodes[3].id
     let girDotArray = document.querySelectorAll(`#${girId} .dot`) 
     let firDotArray = document.querySelectorAll(`#${firId} .dot`)
-    let girCor = [girDotArray[0].style.left.split('px')[0], girDotArray[0].style.top.split('px')[0]]
-    let firCor =[firDotArray[0].style.left.split('px')[0], firDotArray[0].style.top.split('px')[0]]
+    let girCor = `${girDotArray[0].style.left.split('px')[0]}-${girDotArray[0].style.top.split('px')[0]}`
+    let firCor =`${firDotArray[0].style.left.split('px')[0]}-${firDotArray[0].style.top.split('px')[0]}`
     // I have the id i now need to query all and get the dots and then sytle left and top to get the cordinates to save
     console.log(girCor, firCor)
     fetch(`http://localhost:3000/holes/${e.target.dataset.hole}`,{
