@@ -85,8 +85,8 @@ roundSetup.addEventListener('submit', function(e){
               });
             }
 
-            summaryDiv.innerHTML = `<button data-round=${holes[0].round_id} type='button'>Finalize Round</button>`
-            
+            summaryDiv.innerHTML = `<button id='summary-btn' data-round=${holes[0].round_id} type='button'>Finalize Round</button>`
+            document.getElementById('summary-btn').addEventListener('click', summary)
             // let button;
             // for(let i =0; i < holes.length; i++){
             //     button = document.createElement('button')
@@ -222,8 +222,8 @@ holesDiv.addEventListener('submit', function(e){
     })
 })
 
-
-summaryDiv.addEventListener('click', function(e){
+function summary(e){
+    console.log('old=', e.target)
     fetch(`http://localhost:3000/rounds/${e.target.dataset.round}/summary`).then(resp => resp.json()).then(function(summary){
     console.log(summary.girArray)   
     holesDiv.innerHTML = '' 
@@ -255,7 +255,8 @@ summaryDiv.addEventListener('click', function(e){
     // })
     // placeDot(summary.girArray, document.getElementById('gir-summary'))
     // placeDot(summary.fwArray, document.getElementById('fir-summary'))
-})
+
+}
 
 
 // everything for gir and fir location marking and saving-----------------
