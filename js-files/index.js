@@ -164,7 +164,7 @@ holesDiv.addEventListener('submit', function(e){
     let girCor = `${girDotArray[0].style.left.split('px')[0]}-${girDotArray[0].style.top.split('px')[0]}`
     let firCor =`${firDotArray[0].style.left.split('px')[0]}-${firDotArray[0].style.top.split('px')[0]}`
     // I have the id i now need to query all and get the dots and then sytle left and top to get the cordinates to save
-    console.log(girCor, firCor)
+    // console.log(girCor, firCor)
     fetch(`http://localhost:3000/holes/${e.target.dataset.hole}`,{
         method: 'PUT',
         headers: {
@@ -225,17 +225,36 @@ holesDiv.addEventListener('submit', function(e){
 
 summaryDiv.addEventListener('click', function(e){
     fetch(`http://localhost:3000/rounds/${e.target.dataset.round}/summary`).then(resp => resp.json()).then(function(summary){
-        summaryDiv.innerHTML = `
+    console.log(summary.girArray)   
+    holesDiv.innerHTML = '' 
+    summaryDiv.innerHTML = `
         <h1> Round Summary</h1>
         <h3>Score: ${summary.score}</h3>
         <br>
-        <span><img src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'>
-        <img src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'>
-        </span>
+        <div id='gir-summary'> <img id='gir-summary' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'></div>
+        <div id='fir-summary'> <img id='fir-summary'  src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'></div>
         <p>Putts: ${summary.putts}</p>
         <p>Gir: ${summary.gir}</p>
         `
+        console.log('gir=', summary.girArray, 'fir=', summary.fwArray)
+        summary.girArray.forEach(function(cordinate){
+        placeDot(cordinate, document.getElementById('gir-summary'))
+        })
+        summary.fwArray.forEach(function(cordinate){
+        placeDot(cordinate, document.getElementById('fir-summary'))
+        })
+        document.getElementById('gir-summary').onmousedown = GetCoordinates
+
     })
+
+    // summary.girArray.forEach(function(cordinate){
+    //     placeDot(cordinate, document.getElementById('gir-summar'))
+    // })
+    // summary.fwArray.forEach(function(cordinate){
+    //     placeDot(cordinate, document.getElementById('fir-summary'))
+    // })
+    // placeDot(summary.girArray, document.getElementById('gir-summary'))
+    // placeDot(summary.fwArray, document.getElementById('fir-summary'))
 })
 
 
@@ -298,7 +317,6 @@ function placeDot(array,location){
     div.style.top = array[1] + 'px';
     location.appendChild(div)
    
-
 }
 
 function removeDot(){
@@ -306,5 +324,5 @@ function removeDot(){
         el.remove()
     })
 }
-gir.onmousedown = GetCoordinates
-fir.onmousedown = GetCoordinates
+// gir.onmousedown = GetCoordinates
+// fir.onmousedown = GetCoordinates
