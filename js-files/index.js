@@ -77,7 +77,7 @@ roundSetup.addEventListener('submit', function(e){
                 this.classList.toggle("active");
                 let content = this.nextElementSibling;
                 if (content.style.display === "block") {
-                    console.log(document.querySelectorAll(`#${this.nextElementSibling.childNodes[1].id} .dot`))
+                    // console.log(document.querySelectorAll(`#${this.nextElementSibling.childNodes[1].id} .dot`))
                   content.style.display = "none";
                 } else {
                   content.style.display = "block";
@@ -157,7 +157,14 @@ roundSetup.addEventListener('submit', function(e){
 
 holesDiv.addEventListener('submit', function(e){
     e.preventDefault()
-    console.log(e.target)
+    let girId = window.event.path[0].childNodes[1].id
+    let firId = window.event.path[0].childNodes[3].id
+    let girDotArray = document.querySelectorAll(`#${girId} .dot`) 
+    let firDotArray = document.querySelectorAll(`#${firId} .dot`)
+    let girCor = [girDotArray[0].style.left.split('px')[0], girDotArray[0].style.top.split('px')[0]]
+    let firCor =[firDotArray[0].style.left.split('px')[0], firDotArray[0].style.top.split('px')[0]]
+    // I have the id i now need to query all and get the dots and then sytle left and top to get the cordinates to save
+    console.log(girCor, firCor)
     fetch(`http://localhost:3000/holes/${e.target.dataset.hole}`,{
         method: 'PUT',
         headers: {
@@ -166,8 +173,9 @@ holesDiv.addEventListener('submit', function(e){
         body: JSON.stringify({
             par: e.target.par.value,
             score: e.target.score.value,
-            putts: e.target.putts.value
-
+            putts: e.target.putts.value,
+            girloc: girCor,
+            fwloc: firCor
         })
     }).then(resp=> resp.json()).then(function(hole){
         let parent =e.target.parentNode
@@ -189,7 +197,7 @@ holesDiv.addEventListener('submit', function(e){
             girDot: [xGirDot.split('px')[0], yGirDot.split('px')[0]],
             firDot: [xFirDot.split('px')[0], yFirDot.split('px')[0]]
         }
-        console.log(dotObj)
+        // console.log(dotObj)
         
 
         //
