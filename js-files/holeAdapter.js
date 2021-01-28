@@ -14,6 +14,22 @@ class HoleAdapter {
                 round_id: round.id
             })
         })
+    }
+
+    fetchEditHoles(e,girCor,firCor){
+       return fetch(`http://localhost:3000/holes/${e.target.dataset.hole}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                par: e.target.par.value,
+                score: e.target.score.value,
+                putts: e.target.putts.value,
+                girloc: girCor,
+                fwloc: firCor
+            })
+        })
 
     }
 

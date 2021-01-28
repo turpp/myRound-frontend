@@ -3,6 +3,7 @@ const mainDiv =document.getElementById('main-div')
 const holesDiv = document.getElementById('holes-div')
 const summaryDiv = document.getElementById('summary')
 const countryAdapter = new RoundAdapter('http://localhost:3000/rounds')
+const holeAdapter = new HoleAdapter()
 //start
 roundSetup.addEventListener('submit', function(e){
     e.preventDefault()
@@ -29,7 +30,7 @@ roundSetup.addEventListener('submit', function(e){
         //         round_id: round.id
         //     })
         // })
-        const holeAdapter = new HoleAdapter(`http://localhost:3000/rounds/${round.id}/holes`)
+        holeAdapter.baseUrl = `http://localhost:3000/rounds/${round.id}/holes`
         holeAdapter.fetchNewHoles(round)
         .then(resp => resp.json()).then(function(holes){
             mainDiv.innerHTML = ''
@@ -95,19 +96,21 @@ holesDiv.addEventListener('submit', function(e){
     let firDotArray = document.querySelectorAll(`#${firId} .dot`)
     let girCor = `${girDotArray[0].style.left.split('px')[0]}-${girDotArray[0].style.top.split('px')[0]}`
     let firCor =`${firDotArray[0].style.left.split('px')[0]}-${firDotArray[0].style.top.split('px')[0]}`
-    fetch(`http://localhost:3000/holes/${e.target.dataset.hole}`,{
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            par: e.target.par.value,
-            score: e.target.score.value,
-            putts: e.target.putts.value,
-            girloc: girCor,
-            fwloc: firCor
-        })
-    }).then(resp=> resp.json()).then(function(hole){
+    // fetch(`http://localhost:3000/holes/${e.target.dataset.hole}`,{
+    //     method: 'PUT',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         par: e.target.par.value,
+    //         score: e.target.score.value,
+    //         putts: e.target.putts.value,
+    //         girloc: girCor,
+    //         fwloc: firCor
+    //     })
+    // })
+    holeAdapter.fetchEditHoles(e,girCor,firCor)
+    .then(resp=> resp.json()).then(function(hole){
         let parent =e.target.parentNode
         parent.style.display = 'none'
         let grandparent = parent.previousElementSibling
