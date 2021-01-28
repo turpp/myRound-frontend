@@ -2,14 +2,14 @@ const roundSetup = document.getElementById('round-setup')
 const mainDiv =document.getElementById('main-div')
 const holesDiv = document.getElementById('holes-div')
 const summaryDiv = document.getElementById('summary')
-const countryAdapter = new RoundAdapter('http://localhost:3000/rounds')
+const roundAdapter = new RoundAdapter('http://localhost:3000/rounds')
 const holeAdapter = new HoleAdapter()
 //start
 roundSetup.addEventListener('submit', function(e){
     e.preventDefault()
     document.getElementById('title').innerText = 'myRound'
     if(e.target.num_of_holes.value > 0){
-        countryAdapter.fetchNewRound(e)
+        roundAdapter.fetchNewRound(e)
 
     // }fetch('http://localhost:3000/rounds', {
     //     method: 'Post',
@@ -152,7 +152,8 @@ holesDiv.addEventListener('submit', function(e){
 // actions for when you click on the summary button
 function summary(e){
     console.log('old=', e.target)
-    fetch(`http://localhost:3000/rounds/${e.target.dataset.round}/summary`).then(resp => resp.json()).then(function(summary){
+    roundAdapter.fetchRoundSummary(e)
+    .then(function(summary){
     console.log(summary.girArray)   
     holesDiv.innerHTML = '' 
     summaryDiv.innerHTML = `

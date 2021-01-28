@@ -14,4 +14,8 @@ class RoundAdapter{
         })
     })
     }
+
+    fetchRoundSummary(e){
+        return fetch(`http://localhost:3000/rounds/${e.target.dataset.round}/summary`).then(resp => resp.json())
+    }
 }
