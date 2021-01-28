@@ -2,39 +2,36 @@ const roundSetup = document.getElementById('round-setup')
 const mainDiv =document.getElementById('main-div')
 const holesDiv = document.getElementById('holes-div')
 const summaryDiv = document.getElementById('summary')
-
-
+const countryAdapter = new RoundAdapter('http://localhost:3000/rounds')
 //start
 roundSetup.addEventListener('submit', function(e){
     e.preventDefault()
     document.getElementById('title').innerText = 'myRound'
     if(e.target.num_of_holes.value > 0){
-    }fetch('http://localhost:3000/rounds', {
-        method: 'Post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            num_of_holes: e.target.num_of_holes.value
-        })
-    }).then(resp => resp.json()).then(function(round){
-        // let newRound = new Round(round.id, round.score, round.gir, round.fir, round.num_of_holes)
-        // mainDiv.innerHTML = ''
-        // for(let i =0; i < newRound.num_of_holes; i++){
-        //     mainDiv.innerHTML += `<div data-hole=${i+1} class='hole'>Hole ${i+1} score:__<div>`
-        // }
-        return round
-    }).then(function(round){
-        fetch(`http://localhost:3000/rounds/${round.id}/holes`,{
-            method: 'Post',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                num_of_holes: round.num_of_holes,
-                round_id: round.id
-            })
-        }).then(resp => resp.json()).then(function(holes){
+        countryAdapter.fetchNewRound(e)
+
+    // }fetch('http://localhost:3000/rounds', {
+    //     method: 'Post',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         num_of_holes: e.target.num_of_holes.value
+    //     })
+    .then(resp => resp.json()).then(function(round){
+        // fetch(`http://localhost:3000/rounds/${round.id}/holes`,{
+        //     method: 'Post',
+        //     headers: {
+        //     'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         num_of_holes: round.num_of_holes,
+        //         round_id: round.id
+        //     })
+        // })
+        const holeAdapter = new HoleAdapter(`http://localhost:3000/rounds/${round.id}/holes`)
+        holeAdapter.fetchNewHoles(round)
+        .then(resp => resp.json()).then(function(holes){
             mainDiv.innerHTML = ''
             let button;
             let div;
@@ -86,7 +83,7 @@ roundSetup.addEventListener('submit', function(e){
             document.getElementById('summary-btn').addEventListener('click', summary)
         })
     })
-    
+    }
 })
 
 // submiting the form for the hole and sending info to the backend
