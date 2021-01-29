@@ -92,12 +92,16 @@ roundSetup.addEventListener('submit', function(e){
 // submiting the form for the hole and sending info to the backend
 holesDiv.addEventListener('submit', function(e){
     e.preventDefault()
-    let girId = window.event.path[0].childNodes[1].id
-    let firId = window.event.path[0].childNodes[3].id
-    let girDotArray = document.querySelectorAll(`#${girId} .dot`) 
-    let firDotArray = document.querySelectorAll(`#${firId} .dot`)
-    let girCor = `${girDotArray[0].style.left.split('px')[0]}-${girDotArray[0].style.top.split('px')[0]}`
-    let firCor =`${firDotArray[0].style.left.split('px')[0]}-${firDotArray[0].style.top.split('px')[0]}`
+
+    let corArray = holeObj.getGirFirCor()
+    // let girId = window.event.path[0].childNodes[1].id
+    // let firId = window.event.path[0].childNodes[3].id
+    // let girDotArray = document.querySelectorAll(`#${girId} .dot`) 
+    // let firDotArray = document.querySelectorAll(`#${firId} .dot`)
+    // let girCor = `${girDotArray[0].style.left.split('px')[0]}-${girDotArray[0].style.top.split('px')[0]}`
+    // let firCor =`${firDotArray[0].style.left.split('px')[0]}-${firDotArray[0].style.top.split('px')[0]}`
+
+
     // fetch(`http://localhost:3000/holes/${e.target.dataset.hole}`,{
     //     method: 'PUT',
     //     headers: {
@@ -111,7 +115,7 @@ holesDiv.addEventListener('submit', function(e){
     //         fwloc: firCor
     //     })
     // })
-    holeAdapter.fetchEditHoles(e,girCor,firCor)
+    holeAdapter.fetchEditHoles(e,corArray[0],corArray[1])
     .then(resp=> resp.json()).then(function(hole){
         let parent =e.target.parentNode
         parent.style.display = 'none'

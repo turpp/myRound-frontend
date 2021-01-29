@@ -58,4 +58,15 @@ class Hole{
             }
     }
 
+
+    getGirFirCor(){
+      let girId = window.event.path[0].childNodes[1].id
+      let firId = window.event.path[0].childNodes[3].id
+      let girDotArray = document.querySelectorAll(`#${girId} .dot`) 
+      let firDotArray = document.querySelectorAll(`#${firId} .dot`)
+      let girCor = `${girDotArray[0].style.left.split('px')[0]}-${girDotArray[0].style.top.split('px')[0]}`
+      let firCor =`${firDotArray[0].style.left.split('px')[0]}-${firDotArray[0].style.top.split('px')[0]}`
+      return [girCor, firCor]
+    }
+
 }
