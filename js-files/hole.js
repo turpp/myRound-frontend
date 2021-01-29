@@ -37,8 +37,8 @@ class Hole{
                     </form>
                     <br>
                     `
-                    document.getElementById(`girr-hole-${i+1}`).onmousedown = GetCoordinates
-                    document.getElementById(`firr-hole-${i+1}`).onmousedown = GetCoordinates
+                    document.getElementById(`girr-hole-${i+1}`).onmousedown = dotClass.GetCoordinates
+                    document.getElementById(`firr-hole-${i+1}`).onmousedown = dotClass.GetCoordinates
         }
     }
 

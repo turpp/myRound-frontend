@@ -6,6 +6,7 @@ const roundAdapter = new RoundAdapter('http://localhost:3000/rounds')
 const holeAdapter = new HoleAdapter()
 const holeObj = new Hole()
 const roundObj = new Round()
+const dotClass = new Dots()
 //start
 roundSetup.addEventListener('submit', function(e){
     e.preventDefault()
@@ -159,13 +160,13 @@ holesDiv.addEventListener('submit', function(e){
         holeObj.updateHoleForm(e,holeCard,hole)
         //
         // setting event for getting dots
-        document.getElementById(`gir-hole-${holeCard.dataset.holeNum}`).onmousedown = GetCoordinates
-        document.getElementById(`fir-hole-${holeCard.dataset.holeNum}`).onmousedown = GetCoordinates
+        document.getElementById(`gir-hole-${holeCard.dataset.holeNum}`).onmousedown = dotClass.GetCoordinates
+        document.getElementById(`fir-hole-${holeCard.dataset.holeNum}`).onmousedown = dotClass.GetCoordinates
         //
 
         // placing dots back on form
-        placeDot(dotObj.girDot, document.getElementById(`gir-hole-${holeCard.dataset.holeNum}`))
-        placeDot(dotObj.firDot, document.getElementById(`fir-hole-${holeCard.dataset.holeNum}`))
+        dotClass.placeDot(dotObj.girDot, document.getElementById(`gir-hole-${holeCard.dataset.holeNum}`))
+        dotClass.placeDot(dotObj.firDot, document.getElementById(`fir-hole-${holeCard.dataset.holeNum}`))
 
     })
 })
@@ -190,10 +191,10 @@ function summary(e){
         // placing dots on summary images
         console.log('gir=', summary.girArray, 'fir=', summary.fwArray)
         summary.girArray.forEach(function(cordinate){
-        placeDot(cordinate, document.getElementById('gir-summary'))
+        dotClass.placeDot(cordinate, document.getElementById('gir-summary'))
         })
         summary.fwArray.forEach(function(cordinate){
-        placeDot(cordinate, document.getElementById('fir-summary'))
+        dotClass.placeDot(cordinate, document.getElementById('fir-summary'))
         })
 
     })
@@ -204,69 +205,72 @@ function summary(e){
 
 // everything for gir and fir location marking and saving-----------------
 
-function FindPosition(oElement)
-{
-  if(typeof( oElement.offsetParent ) != "undefined")
-  {
-    for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
-    {
-      posX += oElement.offsetLeft;
-      posY += oElement.offsetTop;
-    }
-      return [ posX, posY ];
-    }
-    else
-    {
-      return [ oElement.x, oElement.y ];
-    }
-}
+// function FindPosition(oElement)
+// {
+//   if(typeof( oElement.offsetParent ) != "undefined")
+//   {
+//     for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+//     {
+//       posX += oElement.offsetLeft;
+//       posY += oElement.offsetTop;
+//     }
+//       return [ posX, posY ];
+//     }
+//     else
+//     {
+//       return [ oElement.x, oElement.y ];
+//     }
+// }
 
-function GetCoordinates(e)
+// function GetCoordinates(e)
 
-{
-  var PosX = 0;
-  var PosY = 0;
-//   var ImgPos;
-//   ImgPos = FindPosition(gir);
-  if (!e) var e = window.event;
-  if (e.pageX || e.pageY)
-  {
-    PosX = e.pageX;
-    PosY = e.pageY;
-  }
-  else if (e.clientX || e.clientY)
-    {
-      PosX = e.clientX + document.body.scrollLeft
-        + document.documentElement.scrollLeft;
-      PosY = e.clientY + document.body.scrollTop
-        + document.documentElement.scrollTop;
-    }
-  PosX = PosX;
-  PosY = PosY;
-  let array =[PosX, PosY]
-//   document.getElementById("x").innerHTML = PosX;
-//   document.getElementById("y").innerHTML = PosY;
-  let oldDot = document.querySelectorAll(`#${window.event.path[1].id} .dot`)
-  oldDot.forEach(function(dot){
-      dot.remove()
-  })
-  placeDot(array, e.path[1])
-}
+// {
+//   var PosX = 0;
+//   var PosY = 0;
+// //   var ImgPos;
+// //   ImgPos = FindPosition(gir);
+//   if (!e) var e = window.event;
+//   if (e.pageX || e.pageY)
+//   {
+//     PosX = e.pageX;
+//     PosY = e.pageY;
+//   }
+//   else if (e.clientX || e.clientY)
+//     {
+//       PosX = e.clientX + document.body.scrollLeft
+//         + document.documentElement.scrollLeft;
+//       PosY = e.clientY + document.body.scrollTop
+//         + document.documentElement.scrollTop;
+//     }
+//   PosX = PosX;
+//   PosY = PosY;
+//   let array =[PosX, PosY]
+// //   document.getElementById("x").innerHTML = PosX;
+// //   document.getElementById("y").innerHTML = PosY;
+//   let oldDot = document.querySelectorAll(`#${window.event.path[1].id} .dot`)
+//   oldDot.forEach(function(dot){
+//       dot.remove()
+//   })
+//   placeDot(array, e.path[1])
+// }
 
 
-function placeDot(array,location){
-    let div = document.createElement('div');
-    div.className = 'dot';
-    div.style.left = array[0] + 'px';
-    div.style.top = array[1] + 'px';
-    location.appendChild(div)
+// function placeDot(array,location){
+//     let div = document.createElement('div');
+//     div.className = 'dot';
+//     div.style.left = array[0] + 'px';
+//     div.style.top = array[1] + 'px';
+//     location.appendChild(div)
    
-}
+// }
 
-function removeDot(){
-    document.querySelectorAll('.dot').forEach(function(el){
-        el.remove()
-    })
-}
+// function removeDot(){
+//     document.querySelectorAll('.dot').forEach(function(el){
+//         el.remove()
+//     })
+// }
 // gir.onmousedown = GetCoordinates
 // fir.onmousedown = GetCoordinates
+
+
+// done with changes fro undo
