@@ -117,11 +117,16 @@ holesDiv.addEventListener('submit', function(e){
     // })
     holeAdapter.fetchEditHoles(e,corArray[0],corArray[1])
     .then(resp=> resp.json()).then(function(hole){
-        let parent =e.target.parentNode
-        parent.style.display = 'none'
-        let grandparent = parent.previousElementSibling
-        grandparent.innerHTML = `Hole ${grandparent.dataset.holeNum} score: ${hole.score}`
+        //collapsing card and editing title
+        // let parent =e.target.parentNode
+        // parent.style.display = 'none'
+        // let grandparent = parent.previousElementSibling
+        // grandparent.innerHTML = `Hole ${grandparent.dataset.holeNum} score: ${hole.score}`
+//
+        let grandparent = holeObj.collapseAndChangeCardTitle(e,hole)
+//
 
+//getting cordinates of the dots in the card on submit
         let girDot = document.querySelectorAll(`#gir-hole-${grandparent.dataset.holeNum} .dot`)
         let firDot =document.querySelectorAll(`#fir-hole-${grandparent.dataset.holeNum} .dot`)
         let yGirDot = girDot[0].style.top
@@ -132,11 +137,11 @@ holesDiv.addEventListener('submit', function(e){
             girDot: [xGirDot.split('px')[0], yGirDot.split('px')[0]],
             firDot: [xFirDot.split('px')[0], yFirDot.split('px')[0]]
         }
-        // console.log(dotObj)
+        //
         
 
 
-
+// updated the card after the sumbit form
         e.target.innerHTML = `
         <div id='gir-hole-${grandparent.dataset.holeNum}'> <img id='gir-hole-${grandparent.dataset.holeNum}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'></div>
         <div id='fir-hole-${grandparent.dataset.holeNum}'> <img id='fir-hole-${grandparent.dataset.holeNum}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'></div>
@@ -148,8 +153,13 @@ holesDiv.addEventListener('submit', function(e){
         <input type='number' name='score' value = ${hole.score ? hole.score : 0}>
         <input type='submit' value='Submit Hole'>
         `
+        //
+        // setting event for getting dots
         document.getElementById(`gir-hole-${grandparent.dataset.holeNum}`).onmousedown = GetCoordinates
         document.getElementById(`fir-hole-${grandparent.dataset.holeNum}`).onmousedown = GetCoordinates
+        //
+
+        // placing dots back on form
         placeDot(dotObj.girDot, document.getElementById(`gir-hole-${grandparent.dataset.holeNum}`))
         placeDot(dotObj.firDot, document.getElementById(`fir-hole-${grandparent.dataset.holeNum}`))
 

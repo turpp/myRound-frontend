@@ -69,4 +69,13 @@ class Hole{
       return [girCor, firCor]
     }
 
+
+    collapseAndChangeCardTitle(e,hole){
+      let parent =e.target.parentNode
+        parent.style.display = 'none'
+        let grandparent = parent.previousElementSibling
+        grandparent.innerHTML = `Hole ${grandparent.dataset.holeNum} score: ${hole.score}`
+        return grandparent
+    }
+
 }
