@@ -78,4 +78,32 @@ class Hole{
         return grandparent
     }
 
+    getDotLocations(node){
+      let girDot = document.querySelectorAll(`#gir-hole-${node.dataset.holeNum} .dot`)
+      let firDot =document.querySelectorAll(`#fir-hole-${node.dataset.holeNum} .dot`)
+      let yGirDot = girDot[0].style.top
+      let xGirDot = girDot[0].style.left
+      let xFirDot = firDot[0].style.left
+      let yFirDot = firDot[0].style.top
+      let dotObj = {
+          girDot: [xGirDot.split('px')[0], yGirDot.split('px')[0]],
+          firDot: [xFirDot.split('px')[0], yFirDot.split('px')[0]]
+      }
+      return dotObj
+    }
+
+    updateHoleForm(e,card,hole){
+      e.target.innerHTML = `
+      <div id='gir-hole-${card.dataset.holeNum}'> <img id='gir-hole-${card.dataset.holeNum}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'></div>
+      <div id='fir-hole-${card.dataset.holeNum}'> <img id='fir-hole-${card.dataset.holeNum}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'></div>
+<label>Par</label>
+      <input type='number' name='par' value = ${hole.par ? hole.par : 0}>
+      <label>Putts</label>
+      <input type='number' name='putts' value = ${hole.putts ? hole.putts : 0}>
+      <label>Score</label>
+      <input type='number' name='score' value = ${hole.score ? hole.score : 0}>
+      <input type='submit' value='Submit Hole'>
+      `
+    }
+
 }

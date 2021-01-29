@@ -5,6 +5,7 @@ const summaryDiv = document.getElementById('summary')
 const roundAdapter = new RoundAdapter('http://localhost:3000/rounds')
 const holeAdapter = new HoleAdapter()
 const holeObj = new Hole()
+const roundObj = new Round()
 //start
 roundSetup.addEventListener('submit', function(e){
     e.preventDefault()
@@ -123,64 +124,70 @@ holesDiv.addEventListener('submit', function(e){
         // let grandparent = parent.previousElementSibling
         // grandparent.innerHTML = `Hole ${grandparent.dataset.holeNum} score: ${hole.score}`
 //
-        let grandparent = holeObj.collapseAndChangeCardTitle(e,hole)
+        let holeCard = holeObj.collapseAndChangeCardTitle(e,hole)
 //
 
 //getting cordinates of the dots in the card on submit
-        let girDot = document.querySelectorAll(`#gir-hole-${grandparent.dataset.holeNum} .dot`)
-        let firDot =document.querySelectorAll(`#fir-hole-${grandparent.dataset.holeNum} .dot`)
-        let yGirDot = girDot[0].style.top
-        let xGirDot = girDot[0].style.left
-        let xFirDot = firDot[0].style.left
-        let yFirDot = firDot[0].style.top
-        let dotObj = {
-            girDot: [xGirDot.split('px')[0], yGirDot.split('px')[0]],
-            firDot: [xFirDot.split('px')[0], yFirDot.split('px')[0]]
-        }
+        // let girDot = document.querySelectorAll(`#gir-hole-${grandparent.dataset.holeNum} .dot`)
+        // let firDot =document.querySelectorAll(`#fir-hole-${grandparent.dataset.holeNum} .dot`)
+        // let yGirDot = girDot[0].style.top
+        // let xGirDot = girDot[0].style.left
+        // let xFirDot = firDot[0].style.left
+        // let yFirDot = firDot[0].style.top
+        // let dotObj = {
+        //     girDot: [xGirDot.split('px')[0], yGirDot.split('px')[0]],
+        //     firDot: [xFirDot.split('px')[0], yFirDot.split('px')[0]]
+        // }
+        let dotObj = holeObj.getDotLocations(holeCard)
         //
         
 
 
 // updated the card after the sumbit form
-        e.target.innerHTML = `
-        <div id='gir-hole-${grandparent.dataset.holeNum}'> <img id='gir-hole-${grandparent.dataset.holeNum}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'></div>
-        <div id='fir-hole-${grandparent.dataset.holeNum}'> <img id='fir-hole-${grandparent.dataset.holeNum}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'></div>
-<label>Par</label>
-        <input type='number' name='par' value = ${hole.par ? hole.par : 0}>
-        <label>Putts</label>
-        <input type='number' name='putts' value = ${hole.putts ? hole.putts : 0}>
-        <label>Score</label>
-        <input type='number' name='score' value = ${hole.score ? hole.score : 0}>
-        <input type='submit' value='Submit Hole'>
-        `
+//         e.target.innerHTML = `
+//         <div id='gir-hole-${grandparent.dataset.holeNum}'> <img id='gir-hole-${grandparent.dataset.holeNum}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'></div>
+//         <div id='fir-hole-${grandparent.dataset.holeNum}'> <img id='fir-hole-${grandparent.dataset.holeNum}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'></div>
+// <label>Par</label>
+//         <input type='number' name='par' value = ${hole.par ? hole.par : 0}>
+//         <label>Putts</label>
+//         <input type='number' name='putts' value = ${hole.putts ? hole.putts : 0}>
+//         <label>Score</label>
+//         <input type='number' name='score' value = ${hole.score ? hole.score : 0}>
+//         <input type='submit' value='Submit Hole'>
+//         `
+
+        holeObj.updateHoleForm(e,holeCard,hole)
         //
         // setting event for getting dots
-        document.getElementById(`gir-hole-${grandparent.dataset.holeNum}`).onmousedown = GetCoordinates
-        document.getElementById(`fir-hole-${grandparent.dataset.holeNum}`).onmousedown = GetCoordinates
+        document.getElementById(`gir-hole-${holeCard.dataset.holeNum}`).onmousedown = GetCoordinates
+        document.getElementById(`fir-hole-${holeCard.dataset.holeNum}`).onmousedown = GetCoordinates
         //
 
         // placing dots back on form
-        placeDot(dotObj.girDot, document.getElementById(`gir-hole-${grandparent.dataset.holeNum}`))
-        placeDot(dotObj.firDot, document.getElementById(`fir-hole-${grandparent.dataset.holeNum}`))
+        placeDot(dotObj.girDot, document.getElementById(`gir-hole-${holeCard.dataset.holeNum}`))
+        placeDot(dotObj.firDot, document.getElementById(`fir-hole-${holeCard.dataset.holeNum}`))
 
     })
 })
 // actions for when you click on the summary button
 function summary(e){
-    console.log('old=', e.target)
     roundAdapter.fetchRoundSummary(e)
     .then(function(summary){
-    console.log(summary.girArray)   
-    holesDiv.innerHTML = '' 
-    summaryDiv.innerHTML = `
-        <h1> Round Summary</h1>
-        <h3>Score: ${summary.score}</h3>
-        <br>
-        <div id='gir-summary'> <img id='gir-summary' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'></div>
-        <div id='fir-summary'> <img id='fir-summary'  src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'></div>
-        <p>Putts: ${summary.putts}</p>
-        <p>Gir: ${summary.gir}</p>
-        `
+    // display summary
+    // holesDiv.innerHTML = '' 
+    // summaryDiv.innerHTML = `
+    //     <h1> Round Summary</h1>
+    //     <h3>Score: ${summary.score}</h3>
+    //     <br>
+    //     <div id='gir-summary'> <img id='gir-summary' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='350' height='350'></div>
+    //     <div id='fir-summary'> <img id='fir-summary'  src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='350' height='350'></div>
+    //     <p>Putts: ${summary.putts}</p>
+    //     <p>Gir: ${summary.gir}</p>
+    //     `
+        //
+        roundObj.displaySummary(summary)
+
+        // placing dots on summary images
         console.log('gir=', summary.girArray, 'fir=', summary.fwArray)
         summary.girArray.forEach(function(cordinate){
         placeDot(cordinate, document.getElementById('gir-summary'))
