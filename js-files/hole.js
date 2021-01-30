@@ -75,6 +75,12 @@ class Hole{
 
   getGirFirCor(){
     console.log(window.event, this )
+    let hole = window.event.path[2].firstElementChild.dataset.holeNum
+    console.log(hole)
+    let girDot = document.getElementById(`img-girr-hole-${hole}`)
+    let firDot = document.getElementById(`img-firr-hole-${hole}`)
+    console.log([girDot.dataset.corOnImg, firDot.dataset.corOnImg])
+    return[girDot.dataset.corOnImg, firDot.dataset.corOnImg]
     // let girId = window.event.path[0].childNodes[1].id
     // let firId = window.event.path[0].childNodes[3].id
     // let girDotArray = document.querySelectorAll(`#${girId} .dot`) 

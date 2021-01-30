@@ -83,7 +83,7 @@ class Dots{
           dot.remove()
       })
       
-      dotClass.placeDot(array, e.path[1],this)
+      dotClass.placeDot(array, e.path[1],this, imgCor)
 
 
     }
@@ -124,7 +124,7 @@ class Dots{
     // }
     
     
-    placeDot(array,location,img){
+    placeDot(array,location,img, imgCor){
       console.log('img=',img)
         // let x= array[0] + ImgPos[0]
         // let y = array[1] + ImgPos[1]
@@ -132,6 +132,7 @@ class Dots{
         let div = document.createElement('div');
         div.className = 'dot';
         div.id = `img-${img.id}`
+        div.dataset.corOnImg = imgCor
         div.style.left = array[0] + 'px';
         div.style.top = array[1] + 'px';
         // div.style.left = x + 'px'
