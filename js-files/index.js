@@ -11,7 +11,7 @@ const dotClass = new Dots()
 //start
 roundSetup.addEventListener('submit', function(e){
     e.preventDefault()
-    document.getElementById('title').innerhtml = '<h1>myRound</h1>'
+    document.getElementById('title').innerHTML = '<h1>myRound</h1>'
     if(e.target.num_of_holes.value > 0){
         roundAdapter.fetchNewRound(e)
 
@@ -23,7 +23,7 @@ roundSetup.addEventListener('submit', function(e){
             holeObj.createButtonForms(holes)
             holeObj.makeButtonsCollapsible()
 
-            summaryDiv.innerHTML = `<button id='summary-btn' data-round=${holes[0].round_id} type='button'>Finalize Round</button>`
+            summaryDiv.innerHTML = `<br><button id='summary-btn' data-round=${holes[0].round_id} type='button'>Finalize Round</button>`
             document.getElementById('summary-btn').addEventListener('click', summary)
         })
     })
