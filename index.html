@@ -20,7 +20,7 @@
         }
         
         .content {
-          padding: 0 18px;
+          /* padding: 0 18px; */
           display: none;
           overflow: hidden;
           background-color: #f1f1f1;
@@ -71,7 +71,7 @@
 
 
 
-    <div class="card mx-auto text-center border border-primary">
+    <div class="card mx-auto text-center border border-primary shadow-lg">
       <div id ='title' class="card-header">
         <h1><strong>Welcome to myRound</strong></h1>
       </div>
@@ -85,7 +85,8 @@
     <label class='lead'>How many holes?</label> 
     <input type ='number', name='num_of_holes'> 
     <br>
-    <input type='submit' value="Let's Play Some Golf">
+    <input type='submit' value="Let's Play Some Golf" class="btn btn-success">
+    <!-- <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus"> -->
     </form>
 </div>
 <div id='holes-div'>
@@ -148,6 +149,8 @@
     </script>  -->
     </div>
     </div>
+    <br>
+    <br>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>

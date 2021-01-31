@@ -23,7 +23,7 @@ roundSetup.addEventListener('submit', function(e){
             holeObj.createButtonForms(holes)
             holeObj.makeButtonsCollapsible()
 
-            summaryDiv.innerHTML = `<br><button id='summary-btn' data-round=${holes[0].round_id} type='button'>Finalize Round</button>`
+            summaryDiv.innerHTML = `<br><button id='summary-btn' data-round=${holes[0].round_id} type='button' class="btn btn-dark">Finalize Round</button>`
             document.getElementById('summary-btn').addEventListener('click', summary)
         })
     })

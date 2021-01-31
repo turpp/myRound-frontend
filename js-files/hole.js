@@ -14,7 +14,7 @@ class Hole{
     for(let i = 0; i<holes.length; i++){
       button = document.createElement('button')
       button.type = 'button'
-      button.className = "collapsible"
+      button.className = "collapsible shadow rounded"
       button.dataset.holeNum = i+1
       button.dataset.id = holes[i].id
       holesDiv.appendChild(button)
@@ -25,8 +25,8 @@ class Hole{
       holesDiv.appendChild(div)
       div.innerHTML =`
         <form data-hole=${holes[i].id} id='hole-form'>
-        <span> <img id='girr-hole-${i+1}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'>
-       <img id='firr-hole-${i+1}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></span>
+        <span> <img id='girr-hole-${i+1}' class='border' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'>
+       <img id='firr-hole-${i+1}' class = 'border' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></span>
        <br> 
        <br>
        <label>Par</label>
