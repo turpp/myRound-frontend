@@ -74,8 +74,8 @@ class Dots{
       let imgCor = [imgPosX, imgPosY]
     
 
-      document.getElementById("x").innerHTML = imgPosX;
-      document.getElementById("y").innerHTML = imgPosY;
+      // document.getElementById("x").innerHTML = imgPosX;
+      // document.getElementById("y").innerHTML = imgPosY;
       let oldDot = document.querySelectorAll(`#img-${this.id}`)
       oldDot.forEach(function(dot){ 
         // console.log(dot)

@@ -25,10 +25,11 @@ class Hole{
       holesDiv.appendChild(div)
       div.innerHTML =`
         <form data-hole=${holes[i].id} id='hole-form'>
-        <div id='gir-hole-${i+1}'> <img id='girr-hole-${i+1}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'></div>
-        
-        <div id='fir-hole-${i+1}'> <img id='firr-hole-${i+1}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></div>
-        <label>Par</label>
+        <span> <img id='girr-hole-${i+1}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'>
+       <img id='firr-hole-${i+1}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></span>
+       <br> 
+       <br>
+       <label>Par</label>
         <input type='number' name='par' value = ${holes[i].par ? holes[i].par : 0}>
         <label>Putts</label>
         <input type='number' name='putts' value = ${holes[i].putts ? holes[i].putts : 0}>
@@ -56,8 +57,10 @@ class Hole{
         let content = this.nextElementSibling;
         if (content.style.display === "block") {
           // console.log('inside', this)
+          if(girDot){
           girDot.style.display = 'none'
           firDot.style.display = 'none'
+          }
           // console.log(document.querySelectorAll(`#${this.nextElementSibling.childNodes[1].id} .dot`))
           content.style.display = "none";
       } else {
@@ -74,10 +77,10 @@ class Hole{
 
 
   getGirFirCor(){
-    let hole = window.event.path[2].firstElementChild.dataset.holeNum
-    console.log(window.event.target.firstElementChild.id.split('-')[2], this)
-    let girDot = document.getElementById(`img-girr-hole-${window.event.target.firstElementChild.id.split('-')[2]}`)
-    let firDot = document.getElementById(`img-firr-hole-${window.event.target.firstElementChild.id.split('-')[2]}`)
+    let hole = window.event.path[1].previousElementSibling.dataset.holeNum
+    console.log(window.event.path[1].previousElementSibling.dataset.holeNum, this)
+    let girDot = document.getElementById(`img-girr-hole-${hole}`)
+    let firDot = document.getElementById(`img-firr-hole-${hole}`)
     return[girDot.dataset.corOnImg, firDot.dataset.corOnImg]
     // let girId = window.event.path[0].childNodes[1].id
     // let firId = window.event.path[0].childNodes[3].id
@@ -114,8 +117,10 @@ class Hole{
 
   updateHoleForm(e,card,hole){
     e.target.innerHTML = `
-      <div id='gir-hole-${card.dataset.holeNum}'> <img id='girr-hole-${card.dataset.holeNum}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'></div>
-      <div id='fir-hole-${card.dataset.holeNum}'> <img id='firr-hole-${card.dataset.holeNum}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></div>
+      <span> <img id='girr-hole-${card.dataset.holeNum}' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'>
+       <img id='firr-hole-${card.dataset.holeNum}' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></span>
+       <br>
+       <br>
       <label>Par</label>
       <input type='number' name='par' value = ${hole.par ? hole.par : 0}>
       <label>Putts</label>
