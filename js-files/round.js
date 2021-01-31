@@ -14,6 +14,7 @@ class Round {
             <p>Putts: ${summary.putts}</p>
             <p>Gir: ${summary.gir * 100}%</p>
             <p>Fir: ${summary.fir * 100}%</p>
+            <p>Scramble: ${summary.scramble * 100}%</p>
             `
     }
 
