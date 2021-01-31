@@ -45,7 +45,7 @@ class Hole{
 
   makeButtonsCollapsible(){
     let coll = document.getElementsByClassName("collapsible");
-    console.log('outside', this)
+    // console.log('outside', this)
 
     for (let i = 0; i < coll.length; i++) {
       coll[i].addEventListener("click", function() {
@@ -61,7 +61,7 @@ class Hole{
           // console.log(document.querySelectorAll(`#${this.nextElementSibling.childNodes[1].id} .dot`))
           content.style.display = "none";
       } else {
-        console.log('inside of else', this)
+        // console.log('inside of else', this)
           if(girDot){
           girDot.style.display ='block'
           firDot.style.display = 'block'
@@ -75,8 +75,9 @@ class Hole{
 
   getGirFirCor(){
     let hole = window.event.path[2].firstElementChild.dataset.holeNum
-    let girDot = document.getElementById(`img-girr-hole-${hole}`)
-    let firDot = document.getElementById(`img-firr-hole-${hole}`)
+    console.log(window.event.target.firstElementChild.id.split('-')[2], this)
+    let girDot = document.getElementById(`img-girr-hole-${window.event.target.firstElementChild.id.split('-')[2]}`)
+    let firDot = document.getElementById(`img-firr-hole-${window.event.target.firstElementChild.id.split('-')[2]}`)
     return[girDot.dataset.corOnImg, firDot.dataset.corOnImg]
     // let girId = window.event.path[0].childNodes[1].id
     // let firId = window.event.path[0].childNodes[3].id
@@ -97,7 +98,7 @@ class Hole{
   }
 
   getDotLocations(node){
-    console.log(node.dataset.holeNum)
+    // console.log(node.dataset.holeNum)
     let girDot = document.getElementById(`img-girr-hole-${node.dataset.holeNum}`)
     let firDot =document.getElementById(`img-firr-hole-${node.dataset.holeNum}`)
     let yGirDot = girDot.style.top

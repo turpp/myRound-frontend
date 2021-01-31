@@ -78,7 +78,7 @@ class Dots{
       document.getElementById("y").innerHTML = imgPosY;
       let oldDot = document.querySelectorAll(`#img-${this.id}`)
       oldDot.forEach(function(dot){ 
-        console.log(dot)
+        // console.log(dot)
         
           dot.remove()
       })
@@ -125,7 +125,7 @@ class Dots{
     
     
     placeDot(array,location,img, imgCor){
-      console.log('img=',img)
+      // console.log('img=',img)
         // let x= array[0] + ImgPos[0]
         // let y = array[1] + ImgPos[1]
         let body = document.getElementById('main-body')

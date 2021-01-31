@@ -33,6 +33,7 @@ roundSetup.addEventListener('submit', function(e){
 // submiting the form for the hole and sending info to the backend
 holesDiv.addEventListener('submit', function(e){
     e.preventDefault()
+    console.log('in eventlistner', e, this)
     let corArray = holeObj.getGirFirCor()
     holeAdapter.fetchEditHoles(e,corArray[0],corArray[1])
     .then(resp=> resp.json()).then(function(hole){
@@ -71,7 +72,7 @@ function summary(e){
         console.log('gir=', summary.girArray, 'fir=', summary.fwArray, 'girImg=', girImgPosition, 'firImg=', firImgPosition)
         summary.girArray.forEach(function(cordinate){
             dotPlacement = [cordinate[0]+girImgPosition[0], cordinate[1]+girImgPosition[1]]
-            console.log(dotPlacement)
+            console.log('dotPlacemetn=',dotPlacement)
         dotClass.placeDotSummary(dotPlacement, document.getElementById('gir-summary'))
         })
         summary.fwArray.forEach(function(cordinate){
