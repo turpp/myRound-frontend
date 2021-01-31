@@ -81,7 +81,11 @@ class Hole{
     console.log(window.event.path[1].previousElementSibling.dataset.holeNum, this)
     let girDot = document.getElementById(`img-girr-hole-${hole}`)
     let firDot = document.getElementById(`img-firr-hole-${hole}`)
+    if(girDot){
     return[girDot.dataset.corOnImg, firDot.dataset.corOnImg]
+    } else {
+      alert("Make sure to mark locations on the images.\nIf this is a Par 3, click on whitespace on top of the fairway image.")
+    }
     // let girId = window.event.path[0].childNodes[1].id
     // let firId = window.event.path[0].childNodes[3].id
     // let girDotArray = document.querySelectorAll(`#${girId} .dot`) 
