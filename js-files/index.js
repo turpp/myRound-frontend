@@ -64,12 +64,19 @@ function summary(e){
     roundAdapter.fetchRoundSummary(e)
     .then(function(summary){
         roundObj.displaySummary(summary)
-        console.log('gir=', summary.girArray, 'fir=', summary.fwArray)
+        let dotPlacement = []
+        let girImgPosition = dotClass.FindPosition(document.getElementById('girr-summary'))
+        let firImgPosition = dotClass.FindPosition(document.getElementById('firr-summary'))
+        //I need to take the img position of summary and then add it to the cor from the database
+        console.log('gir=', summary.girArray, 'fir=', summary.fwArray, 'girImg=', girImgPosition, 'firImg=', firImgPosition)
         summary.girArray.forEach(function(cordinate){
-        dotClass.placeDot(cordinate, document.getElementById('gir-summary'))
+            dotPlacement = [cordinate[0]+girImgPosition[0], cordinate[1]+girImgPosition[1]]
+            console.log(dotPlacement)
+        dotClass.placeDotSummary(dotPlacement, document.getElementById('gir-summary'))
         })
         summary.fwArray.forEach(function(cordinate){
-        dotClass.placeDot(cordinate, document.getElementById('fir-summary'))
+            dotPlacement = [cordinate[0]+firImgPosition[0], cordinate[1]+firImgPosition[1]]
+        dotClass.placeDotSummary(dotPlacement, document.getElementById('fir-summary'))
         })
     })
 

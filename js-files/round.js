@@ -9,8 +9,8 @@ class Round {
             <h1> Round Summary</h1>
             <h3>Score: ${summary.score}</h3>
             <br>
-            <div id='gir-summary'> <img id='gir-summary' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'></div>
-            <div id='fir-summary'> <img id='fir-summary'  src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></div>
+            <div id='gir-summary'> <img id='girr-summary' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'></div>
+            <div id='fir-summary'> <img id='firr-summary'  src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></div>
             <p>Putts: ${summary.putts}</p>
             <p>Gir: ${summary.gir}</p>
             `

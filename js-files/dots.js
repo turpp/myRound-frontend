@@ -74,8 +74,8 @@ class Dots{
       let imgCor = [imgPosX, imgPosY]
     
 
-      document.getElementById("x").innerHTML = PosX;
-      document.getElementById("y").innerHTML = PosY;
+      document.getElementById("x").innerHTML = imgPosX;
+      document.getElementById("y").innerHTML = imgPosY;
       let oldDot = document.querySelectorAll(`#img-${this.id}`)
       oldDot.forEach(function(dot){ 
         console.log(dot)
@@ -144,6 +144,16 @@ class Dots{
         document.querySelectorAll('.dot').forEach(function(el){
             el.remove()
         })
+    }
+
+    placeDotSummary(array, img){
+      let body = document.getElementById('main-body')
+      let div = document.createElement('div');
+      div.className = 'dot';
+      div.style.left = array[0] + 'px';
+      div.style.top = array[1] + 'px';
+      body.appendChild(div)
+
     }
     // gir.onmousedown = GetCoordinates
     // fir.onmousedown = GetCoordinates
