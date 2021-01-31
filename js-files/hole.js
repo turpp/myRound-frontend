@@ -74,12 +74,9 @@ class Hole{
 
 
   getGirFirCor(){
-    console.log(window.event, this )
     let hole = window.event.path[2].firstElementChild.dataset.holeNum
-    console.log(hole)
     let girDot = document.getElementById(`img-girr-hole-${hole}`)
     let firDot = document.getElementById(`img-firr-hole-${hole}`)
-    console.log([girDot.dataset.corOnImg, firDot.dataset.corOnImg])
     return[girDot.dataset.corOnImg, firDot.dataset.corOnImg]
     // let girId = window.event.path[0].childNodes[1].id
     // let firId = window.event.path[0].childNodes[3].id
@@ -100,12 +97,13 @@ class Hole{
   }
 
   getDotLocations(node){
-    let girDot = document.querySelectorAll(`#gir-hole-${node.dataset.holeNum} .dot`)
-    let firDot =document.querySelectorAll(`#fir-hole-${node.dataset.holeNum} .dot`)
-    let yGirDot = girDot[0].style.top
-    let xGirDot = girDot[0].style.left
-    let xFirDot = firDot[0].style.left
-    let yFirDot = firDot[0].style.top
+    console.log(node.dataset.holeNum)
+    let girDot = document.getElementById(`img-girr-hole-${node.dataset.holeNum}`)
+    let firDot =document.getElementById(`img-firr-hole-${node.dataset.holeNum}`)
+    let yGirDot = girDot.style.top
+    let xGirDot = girDot.style.left
+    let xFirDot = firDot.style.left
+    let yFirDot = firDot.style.top
     let dotObj = {
       girDot: [xGirDot.split('px')[0], yGirDot.split('px')[0]],
       firDot: [xFirDot.split('px')[0], yFirDot.split('px')[0]]
@@ -125,6 +123,10 @@ class Hole{
       <input type='number' name='score' value = ${hole.score ? hole.score : 0}>
       <input type='submit' value='Submit Hole'>
       `
+      let girDot = document.getElementById(`img-girr-hole-${card.dataset.holeNum}`)
+      let firDot = document.getElementById(`img-firr-hole-${card.dataset.holeNum}`)
+      girDot.style.display = 'none'
+      firDot.style.display = 'none'
   }
 
 }
