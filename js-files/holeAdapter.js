@@ -19,13 +19,13 @@ class HoleAdapter {
     fetchEditHoles(e,girCor,firCor){
 
         switch(true){
-            case (e.target.score.value == 0):
+            case (e.target.score.value <= 0):
                 alert("Please fill out score field.");
                 break;
-            case (e.target.par.value == 0):
+            case (e.target.par.value <= 0):
                 alert("Please fill out par field.");
                 break;
-            case (e.target.putts.value == 0):
+            case (e.target.putts.value <= 0):
                 alert("Please fill out putts field.")
                 break;
             default:
