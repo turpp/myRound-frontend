@@ -44,12 +44,12 @@ class Dots{
       oldDot.forEach(function(dot){         
           dot.remove()
       })
-      dotClass.placeDot(array, e.path[1],this, imgCor)
+      dotClass.placeDot(array,this,imgCor)
       // document.getElementById("x").innerHTML = PosX;
       // document.getElementById("y").innerHTML = PosY;
     }
 
-    placeDot(array,location,img, imgCor){
+    placeDot(array,img,imgCor){
         let body = document.getElementById('main-body')
         let div = document.createElement('div');
         div.className = 'dot';

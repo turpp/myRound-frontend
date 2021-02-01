@@ -31,7 +31,7 @@ roundSetup.addEventListener('submit', function(e){
 // submiting the form for the hole and sending info to the backend
 holesDiv.addEventListener('submit', function(e){
     e.preventDefault()
-    let corArray = holeObj.getGirFirCor()
+    let corArray = holeObj.getGirFirCor(e.target.dataset.holeNum)
     holeAdapter.fetchEditHoles(e,corArray[0],corArray[1])
     .then(resp=> resp.json()).then(function(hole){
         let holeCard = holeObj.collapseAndChangeCardTitle(e,hole)
