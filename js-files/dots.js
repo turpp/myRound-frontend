@@ -17,25 +17,18 @@ class Dots{
         }
     }
     
-    GetCoordinates(e)
+
+
+
+    GetCoordinates()
     {
       let PosX = 0;
       let PosY = 0;
       let ImgPos;
+      let e = window.event
       ImgPos = dotClass.FindPosition(this);
-      if (!e) var e = window.event;
-      if (e.pageX || e.pageY)
-      {
         PosX = e.pageX;
         PosY = e.pageY;
-      }
-      else if (e.clientX || e.clientY)
-        {
-          PosX = e.clientX + document.body.scrollLeft
-            + document.documentElement.scrollLeft;
-          PosY = e.clientY + document.body.scrollTop
-            + document.documentElement.scrollTop;
-        }
       let imgPosX = PosX-ImgPos[0];
       let imgPosY = PosY-ImgPos[1];
       let array =[PosX, PosY]
@@ -48,6 +41,48 @@ class Dots{
       // document.getElementById("x").innerHTML = PosX;
       // document.getElementById("y").innerHTML = PosY;
     }
+
+
+
+
+
+
+
+
+
+
+
+    // GetCoordinates(e)
+    // {
+    //   let PosX = 0;
+    //   let PosY = 0;
+    //   let ImgPos;
+    //   ImgPos = dotClass.FindPosition(this);
+    //   if (!e) var e = window.event;
+    //   if (e.pageX || e.pageY)
+    //   {
+    //     PosX = e.pageX;
+    //     PosY = e.pageY;
+    //   }
+    //   else if (e.clientX || e.clientY)
+    //     {
+    //       PosX = e.clientX + document.body.scrollLeft
+    //         + document.documentElement.scrollLeft;
+    //       PosY = e.clientY + document.body.scrollTop
+    //         + document.documentElement.scrollTop;
+    //     }
+    //   let imgPosX = PosX-ImgPos[0];
+    //   let imgPosY = PosY-ImgPos[1];
+    //   let array =[PosX, PosY]
+    //   let imgCor = [imgPosX, imgPosY]
+    //   let oldDot = document.querySelectorAll(`#img-${this.id}`)
+    //   oldDot.forEach(function(dot){         
+    //       dot.remove()
+    //   })
+    //   dotClass.placeDot(array,this,imgCor)
+    //   // document.getElementById("x").innerHTML = PosX;
+    //   // document.getElementById("y").innerHTML = PosY;
+    // }
 
     placeDot(array,img,imgCor){
         let body = document.getElementById('main-body')
