@@ -26,10 +26,10 @@ class Hole{
       div.innerHTML =`
         <form data-hole=${holes[i].id} id='hole-form'>
         <span> <img id='girr-hole-${i+1}' class='border' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'>
-       <img id='firr-hole-${i+1}' class = 'border' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></span>
-       <br> 
-       <br>
-       <label>Par</label>
+        <img id='firr-hole-${i+1}' class = 'border' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></span>
+        <br> 
+        <br>
+        <label>Par</label>
         <input type='number' name='par' value = ${holes[i].par ? holes[i].par : 0}>
         <label>Putts</label>
         <input type='number' name='putts' value = ${holes[i].putts ? holes[i].putts : 0}>
@@ -72,7 +72,6 @@ class Hole{
 
   getGirFirCor(){
     let hole = window.event.path[1].previousElementSibling.dataset.holeNum
-    console.log(window.event.path[1].previousElementSibling.dataset.holeNum, this)
     let girDot = document.getElementById(`img-girr-hole-${hole}`)
     let firDot = document.getElementById(`img-firr-hole-${hole}`)
     if(girDot){

@@ -14,7 +14,6 @@ roundSetup.addEventListener('submit', function(e){
     document.getElementById('title').innerHTML = '<h1>myRound</h1>'
     if(e.target.num_of_holes.value > 0){
         roundAdapter.fetchNewRound(e)
-
     .then(resp => resp.json()).then(function(round){
         holeAdapter.baseUrl = `http://localhost:3000/rounds/${round.id}/holes`
         holeAdapter.fetchNewHoles(round)
@@ -22,7 +21,6 @@ roundSetup.addEventListener('submit', function(e){
             mainDiv.innerHTML = ''
             holeObj.createButtonForms(holes)
             holeObj.makeButtonsCollapsible()
-
             summaryDiv.innerHTML = `<br><button id='summary-btn' data-round=${holes[0].round_id} type='button' class="btn btn-dark">Finalize Round</button>`
             document.getElementById('summary-btn').addEventListener('click', summary)
         })
@@ -33,17 +31,17 @@ roundSetup.addEventListener('submit', function(e){
 // submiting the form for the hole and sending info to the backend
 holesDiv.addEventListener('submit', function(e){
     e.preventDefault()
-    console.log('in eventlistner', e, this)
     let corArray = holeObj.getGirFirCor()
     holeAdapter.fetchEditHoles(e,corArray[0],corArray[1])
     .then(resp=> resp.json()).then(function(hole){
         let holeCard = holeObj.collapseAndChangeCardTitle(e,hole)
-        // let dotObj = holeObj.getDotLocations(holeCard)
         holeObj.updateHoleForm(e,holeCard,hole)
         document.getElementById(`girr-hole-${holeCard.dataset.holeNum}`).onmousedown = dotClass.GetCoordinates
         document.getElementById(`firr-hole-${holeCard.dataset.holeNum}`).onmousedown = dotClass.GetCoordinates
     })
 })
+
+//summary
 function summary(e){
     roundAdapter.fetchRoundSummary(e)
     .then(function(summary){
@@ -51,16 +49,18 @@ function summary(e){
         let dotPlacement = []
         let girImgPosition = dotClass.FindPosition(document.getElementById('girr-summary'))
         let firImgPosition = dotClass.FindPosition(document.getElementById('firr-summary'))
-        console.log('gir=', summary.girArray, 'fir=', summary.fwArray, 'girImg=', girImgPosition, 'firImg=', firImgPosition)
         summary.girArray.forEach(function(cordinate){
             dotPlacement = [cordinate[0]+girImgPosition[0], cordinate[1]+girImgPosition[1]]
-            console.log('dotPlacemetn=',dotPlacement)
-        dotClass.placeDotSummary(dotPlacement, document.getElementById('gir-summary'))
+            dotClass.placeDotSummary(dotPlacement, document.getElementById('gir-summary'))
         })
         summary.fwArray.forEach(function(cordinate){
             dotPlacement = [cordinate[0]+firImgPosition[0], cordinate[1]+firImgPosition[1]]
-        dotClass.placeDotSummary(dotPlacement, document.getElementById('fir-summary'))
+            dotClass.placeDotSummary(dotPlacement, document.getElementById('fir-summary'))
         })
     })
+}
+
+function instructions(){
+    alert("How to use myRound!\n   \nPlease select the number of holes you would like to play. Don't worry if you don't finish all the holes, the application will ignore any blank holes\n   \nClick on the tiles for the hole you are playing. This will expand to give you fields to fill out about that hole. For the two images:\n-The first image is the green with the middle being the cup. Each circle can be either 5 or 10 feet depending on your skill level. Just make sure you decide before the round and stick to it.\n-The second image is the fairway. Anything in the middle is the fairway, anything between the dotted and solid lines are the rough. Anything outside of the solid lines, is out of bounds. Currently the application only supports one tee shot per hole.\n   \nIMPORTANT: Since Par threes do not have fairways please click on the very top or bottom of the image. These dots will show up in your summary, but you will be able to tell they are par threes due to the placement. The FIR% will not count any par 3's in its calculation.\n   \nFill out the rest of the form and click submit to save the hole. If you do not save, once you click the Finalize button you will loose everything.\nClicking on Finalize round will give you your full round stats! I hope you enjoy! : ) ")
 }
 

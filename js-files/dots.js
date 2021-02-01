@@ -5,26 +5,23 @@ class Dots{
     }
     FindPosition(oElement)
     {
-      if(typeof( oElement.offsetParent ) != "undefined")
-      {
-        for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
-        {
+      if(typeof( oElement.offsetParent ) != "undefined"){
+        for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent){
           posX += oElement.offsetLeft;
           posY += oElement.offsetTop;
         }
           return [ posX, posY ];
         }
-        else
-        {
+        else{
           return [ oElement.x, oElement.y ];
         }
     }
     
     GetCoordinates(e)
     {
-      var PosX = 0;
-      var PosY = 0;
-      var ImgPos;
+      let PosX = 0;
+      let PosY = 0;
+      let ImgPos;
       ImgPos = dotClass.FindPosition(this);
       if (!e) var e = window.event;
       if (e.pageX || e.pageY)
@@ -81,13 +78,3 @@ class Dots{
     // gir.onmousedown = GetCoordinates
     // fir.onmousedown = GetCoordinates
 }
-
-
-
-
-
-
-
-
-
-// ***** I have the image getting x and y according to the image now I need to adust my dot placement.
