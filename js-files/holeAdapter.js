@@ -17,7 +17,6 @@ class HoleAdapter {
     }
 
     fetchEditHoles(e,girCor,firCor){
-
         switch(true){
             case (e.target.score.value <= 0):
                 alert("Please fill out score field.");
@@ -42,27 +41,7 @@ class HoleAdapter {
                         fwloc: firCor
                     })
                 })
-
-
         }
 
-    //     if(e.target.score.value == 0){
-    //         alert("Please Fill out score field");
-    //     }else {
-    //    return fetch(`http://localhost:3000/holes/${e.target.dataset.hole}`,{
-    //         method: 'PUT',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             par: e.target.par.value,
-    //             score: e.target.score.value,
-    //             putts: e.target.putts.value,
-    //             girloc: girCor,
-    //             fwloc: firCor
-    //         })
-    //     })
-    //     }
     }
-
 }

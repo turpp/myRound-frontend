@@ -46,25 +46,19 @@ class Hole{
 
   makeButtonsCollapsible(){
     let coll = document.getElementsByClassName("collapsible");
-    // console.log('outside', this)
-
     for (let i = 0; i < coll.length; i++) {
       coll[i].addEventListener("click", function() {
         let girDot = document.getElementById(`img-girr-hole-${this.dataset.holeNum}`)
         let firDot = document.getElementById(`img-firr-hole-${this.dataset.holeNum}`)
-
         this.classList.toggle("active");
         let content = this.nextElementSibling;
         if (content.style.display === "block") {
-          // console.log('inside', this)
           if(girDot){
           girDot.style.display = 'none'
           firDot.style.display = 'none'
           }
-          // console.log(document.querySelectorAll(`#${this.nextElementSibling.childNodes[1].id} .dot`))
           content.style.display = "none";
       } else {
-        // console.log('inside of else', this)
           if(girDot){
           girDot.style.display ='block'
           firDot.style.display = 'block'
@@ -86,13 +80,6 @@ class Hole{
     } else {
       alert("Make sure to mark locations on the images.\nIf this is a Par 3, click on whitespace on top of the fairway image.")
     }
-    // let girId = window.event.path[0].childNodes[1].id
-    // let firId = window.event.path[0].childNodes[3].id
-    // let girDotArray = document.querySelectorAll(`#${girId} .dot`) 
-    // let firDotArray = document.querySelectorAll(`#${firId} .dot`)
-    // let girCor = `${girDotArray[0].style.left.split('px')[0]}-${girDotArray[0].style.top.split('px')[0]}`
-    // let firCor =`${firDotArray[0].style.left.split('px')[0]}-${firDotArray[0].style.top.split('px')[0]}`
-    // return [girCor, firCor]
   }
 
 
@@ -105,7 +92,6 @@ class Hole{
   }
 
   getDotLocations(node){
-    // console.log(node.dataset.holeNum)
     let girDot = document.getElementById(`img-girr-hole-${node.dataset.holeNum}`)
     let firDot =document.getElementById(`img-firr-hole-${node.dataset.holeNum}`)
     let yGirDot = girDot.style.top

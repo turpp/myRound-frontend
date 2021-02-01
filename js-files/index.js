@@ -37,28 +37,11 @@ holesDiv.addEventListener('submit', function(e){
     let corArray = holeObj.getGirFirCor()
     holeAdapter.fetchEditHoles(e,corArray[0],corArray[1])
     .then(resp=> resp.json()).then(function(hole){
-       
-// getting response from edit fetch. that is the data for a hole
-// I update the card with the score of the hole
-// I get the dot locations from the HTML
-// I take the data from the hole minus dots and fill in the form
-// add event to registar new dots
-// place dots that i got early from the html back on the page
-
-// problem: getting dots from the HTML and placing them back on the imgs
-// solutions: 
-// a: I can get the dots from the html and just replace them before. I just need to change where the dotobj i slooking for the dots
-// b: I can pull the locations from the edit response and figure out how to use place dot and get cordinate to reverse engineer where to put them.
-
-
         let holeCard = holeObj.collapseAndChangeCardTitle(e,hole)
         // let dotObj = holeObj.getDotLocations(holeCard)
         holeObj.updateHoleForm(e,holeCard,hole)
         document.getElementById(`girr-hole-${holeCard.dataset.holeNum}`).onmousedown = dotClass.GetCoordinates
         document.getElementById(`firr-hole-${holeCard.dataset.holeNum}`).onmousedown = dotClass.GetCoordinates
-        // dotClass.placeDot(dotObj.girDot, document.getElementById(`gir-hole-${holeCard.dataset.holeNum}`))
-        // dotClass.placeDot(dotObj.firDot, document.getElementById(`fir-hole-${holeCard.dataset.holeNum}`))
-
     })
 })
 function summary(e){
@@ -68,7 +51,6 @@ function summary(e){
         let dotPlacement = []
         let girImgPosition = dotClass.FindPosition(document.getElementById('girr-summary'))
         let firImgPosition = dotClass.FindPosition(document.getElementById('firr-summary'))
-        //I need to take the img position of summary and then add it to the cor from the database
         console.log('gir=', summary.girArray, 'fir=', summary.fwArray, 'girImg=', girImgPosition, 'firImg=', firImgPosition)
         summary.girArray.forEach(function(cordinate){
             dotPlacement = [cordinate[0]+girImgPosition[0], cordinate[1]+girImgPosition[1]]
@@ -80,9 +62,5 @@ function summary(e){
         dotClass.placeDotSummary(dotPlacement, document.getElementById('fir-summary'))
         })
     })
-
-
 }
 
-// gir.onmousedown = GetCoordinates
-// fir.onmousedown = GetCoordinates
