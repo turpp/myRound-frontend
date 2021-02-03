@@ -46,18 +46,33 @@ holesDiv.addEventListener('submit', function(e){
 function summary(e){
     roundAdapter.fetchRoundSummary(e)
     .then(function(summary){
+        console.log(summary)
         roundObj.displaySummary(summary)
-        let dotPlacement = []
+
         let girImgPosition = dotClass.FindPosition(document.getElementById('girr-summary'))
         let firImgPosition = dotClass.FindPosition(document.getElementById('firr-summary'))
-        summary.girArray.forEach(function(cordinate){
-            dotPlacement = [cordinate[0]+girImgPosition[0], cordinate[1]+girImgPosition[1]]
-            dotClass.placeDotSummary(dotPlacement, document.getElementById('gir-summary'))
+
+
+        summary.holes.forEach((hole) => {
+            fwloc = [parseInt(hole.fwloc.split(',')[0])+firImgPosition[0], parseInt(hole.fwloc.split(',')[1])+firImgPosition[1]]
+            girloc = [parseInt(hole.girloc.split(',')[0])+girImgPosition[0], parseInt(hole.girloc.split(',')[1])+girImgPosition[1]]
+            dotClass.placeDotSummary(fwloc, document.getElementById('fir-summary'))
+            dotClass.placeDotSummary(girloc, document.getElementById('gir-summary'))
         })
-        summary.fwArray.forEach(function(cordinate){
-            dotPlacement = [cordinate[0]+firImgPosition[0], cordinate[1]+firImgPosition[1]]
-            dotClass.placeDotSummary(dotPlacement, document.getElementById('fir-summary'))
-        })
+
+
+
+        // let dotPlacement = []
+        // let girImgPosition = dotClass.FindPosition(document.getElementById('girr-summary'))
+        // let firImgPosition = dotClass.FindPosition(document.getElementById('firr-summary'))
+        // summary.girArray.forEach(function(cordinate){
+        //     dotPlacement = [cordinate[0]+girImgPosition[0], cordinate[1]+girImgPosition[1]]
+        //     dotClass.placeDotSummary(dotPlacement, document.getElementById('gir-summary'))
+        // })
+        // summary.fwArray.forEach(function(cordinate){
+        //     dotPlacement = [cordinate[0]+firImgPosition[0], cordinate[1]+firImgPosition[1]]
+        //     dotClass.placeDotSummary(dotPlacement, document.getElementById('fir-summary'))
+        // })
     })
 }
 
