@@ -11,7 +11,7 @@ class Round {
             <br>
             <div id='gir-summary'> <img id='girr-summary' src='https://i.ibb.co/cgBBY05/GIR-image.jpg' alt='green' width='250' height='250'></div>
             <div id='fir-summary'> <img id='firr-summary'  src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></div>
-            <p>Putts: ${summary.putts}</p>
+            <p>Putts: ${summary.total_putts}</p>
             <p>Gir: ${summary.gir * 100}%</p>
             <p>Fir: ${summary.fir * 100}%</p>
             <p>Scramble: ${summary.scramble * 100}%</p>
