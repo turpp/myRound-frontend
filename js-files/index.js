@@ -7,6 +7,7 @@ const holeAdapter = new HoleAdapter()
 const holeObj = new Hole()
 const roundObj = new Round()
 const dotClass = new Dots()
+const searchRound = document.getElementById('search')
 // let allDots = []
 
 //start
@@ -44,9 +45,9 @@ holesDiv.addEventListener('submit', function(e){
 
 //summary
 function summary(e){
-    roundAdapter.fetchRoundSummary(e)
+    console.log(e)
+    roundAdapter.fetchRoundSummary(e.target.dataset.round)
     .then(function(summary){
-        console.log(summary)
         roundObj.displaySummary(summary)
 
         let girImgPosition = dotClass.FindPosition(document.getElementById('girr-summary'))
@@ -84,4 +85,30 @@ function refresh(){
     console.log('in refresh')
     location.reload()
 }
+
+searchRound.addEventListener('submit', e => {
+    e.preventDefault()
+    mainDiv.innerHTML = ''
+    let dots = document.querySelectorAll('.dot')
+    if(dots){
+        dots.forEach(dot => {
+            dot.style.display = 'none'
+        })
+    }
+    roundAdapter.fetchRoundSummary(e.target.roundId.value).then(summary => {
+        roundObj.displaySummary(summary)
+
+        let girImgPosition = dotClass.FindPosition(document.getElementById('girr-summary'))
+        let firImgPosition = dotClass.FindPosition(document.getElementById('firr-summary'))
+
+
+        summary.holes.forEach((hole) => {
+            fwloc = [parseInt(hole.fwloc.split(',')[0])+firImgPosition[0], parseInt(hole.fwloc.split(',')[1])+firImgPosition[1]]
+            girloc = [parseInt(hole.girloc.split(',')[0])+girImgPosition[0], parseInt(hole.girloc.split(',')[1])+girImgPosition[1]]
+            dotClass.placeDotSummary(fwloc, document.getElementById('fir-summary'))
+            dotClass.placeDotSummary(girloc, document.getElementById('gir-summary'))
+        })
+    })
+
+})
 

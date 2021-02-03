@@ -15,8 +15,7 @@ class RoundAdapter{
     })
     }
 
-    fetchRoundSummary(e){
-        console.log(e.target.dataset.round)
-        return fetch(`http://localhost:3000/rounds/${e.target.dataset.round}`).then(resp => resp.json())
+    fetchRoundSummary(id){
+        return fetch(`http://localhost:3000/rounds/${id}`).then(resp => resp.json())
     }
 }
