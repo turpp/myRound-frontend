@@ -1,8 +1,11 @@
 class Dots{
-    constructor(x, y){
+    constructor(x, y,img, holeNum){
         this.xCor = x
         this.yCor = y
+        this.img = img
+        this.holeNum = holeNum
     }
+    
     FindPosition(oElement)
     {
       if(typeof( oElement.offsetParent ) != "undefined"){
@@ -34,6 +37,8 @@ class Dots{
       let array =[PosX, PosY]
       let imgCor = [imgPosX, imgPosY]
       let oldDot = document.querySelectorAll(`#img-${this.id}`)
+      // allDots.push(new Dots(PosX, PosY, this.id.split('-')[0], this.id.split('-'[2])))
+      // console.log(allDots)
       oldDot.forEach(function(dot){         
           dot.remove()
       })

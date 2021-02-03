@@ -89,6 +89,7 @@ class Hole{
     return grandparent
   }
 
+  //
   getDotLocations(node){
     let girDot = document.getElementById(`img-girr-hole-${node.dataset.holeNum}`)
     let firDot =document.getElementById(`img-firr-hole-${node.dataset.holeNum}`)
@@ -102,6 +103,7 @@ class Hole{
     }
     return dotObj
   }
+  //
 
   updateHoleForm(e,card,hole){
     e.target.innerHTML = `

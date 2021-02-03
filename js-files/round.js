@@ -15,6 +15,7 @@ class Round {
             <p>Gir: ${summary.gir * 100}%</p>
             <p>Fir: ${summary.fir * 100}%</p>
             <p>Scramble: ${summary.scramble * 100}%</p>
+            <button class = 'btn btn-dark' onclick="refresh()">Start New Game</button>
             `
     }
 
