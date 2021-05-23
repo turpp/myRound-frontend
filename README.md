@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Date Sidekick 👋</h1>
+<h1 align="center">Welcome to myRound 👋</h1>
 <p>
     myRound is a stat tracker for your round of golf. Its designed to be light weight and easy to use. Most stat trackers require either to much time to fill out mid round or gives you to much useless infomration. myRound fixes this by having a quick interface and a simple review screen
 </p>
@@ -13,9 +13,9 @@ Before your round of golf make sure to enter how many holes you are planning on 
 
 
 # start
-    - clone the repository
-    - make sure that the backend is up and running. instructions to do show is in the README.md of the backend application.  https://github.com/turpp/myRound-backend
-    - in terminal run => open index.html
+* clone the repository
+* make sure that the backend is up and running. instructions to do show is in the README.md of the backend application.  https://github.com/turpp/myRound-backend
+* in terminal run => open index.html
 
 ## Author
 
