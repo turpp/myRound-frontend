@@ -29,13 +29,20 @@ class Hole{
         <img id='firr-hole-${i+1}' class = 'border' src='https://i.ibb.co/mv7cmHz/fir-image.jpg' alt='fairway' width='250' height='250'></span>
         <br> 
         <br>
+        <div class="mb-3">
         <label>Par</label>
-        <input type='number' name='par' value = ${holes[i].par ? holes[i].par : 0}>
+        <input align='left' type='number' name='par' value = ${holes[i].par ? holes[i].par : 0}>
+        </div>
+        <div>
         <label>Putts</label>
-        <input type='number' name='putts' value = ${holes[i].putts ? holes[i].putts : 0}>
+        <input type='number' align="left" name='putts' value = ${holes[i].putts ? holes[i].putts : 0}>
+        </div>
+        <div>
         <label>Score</label>
-        <input type='number' name='score' value = ${holes[i].score ? holes[i].score : 0}>
-        <input type='submit' value='Submit Hole'>
+        <input type='number' align="left" name='score' value = ${holes[i].score ? holes[i].score : 0}>
+        </div>
+        <input type='submit' align="left" value='Submit Hole'>
+        
         </form>
         <br>
         `
@@ -112,12 +119,12 @@ class Hole{
        <br>
        <br>
       <label>Par</label>
-      <input type='number' name='par' value = ${hole.par ? hole.par : 0}>
+      <input type='number' align="left" name='par' value = ${hole.par ? hole.par : 0}>
       <label>Putts</label>
-      <input type='number' name='putts' value = ${hole.putts ? hole.putts : 0}>
+      <input type='number' align="left" name='putts' value = ${hole.putts ? hole.putts : 0}>
       <label>Score</label>
-      <input type='number' name='score' value = ${hole.score ? hole.score : 0}>
-      <input type='submit' value='Submit Hole'>
+      <input type='number' align="left" name='score' value = ${hole.score ? hole.score : 0}>
+      <input type='submit' align="left" value='Submit Hole'>
       `
       let girDot = document.getElementById(`img-girr-hole-${card.dataset.holeNum}`)
       let firDot = document.getElementById(`img-firr-hole-${card.dataset.holeNum}`)
