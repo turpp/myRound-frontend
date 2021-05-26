@@ -16,6 +16,6 @@ class RoundAdapter{
     }
 
     fetchRoundSummary(id){
-        return fetch(`http://localhost:3000/rounds/${id}`).then(resp => resp.json())
+        return fetch(`https://pure-spire-89764.herokuapp.com/rounds/${id}`).then(resp => resp.json())
     }
 }

@@ -28,7 +28,7 @@ class HoleAdapter {
                 alert("Please fill out putts field.")
                 break;
             default:
-                return fetch(`http://localhost:3000/holes/${e.target.dataset.hole}`,{
+                return fetch(`https://pure-spire-89764.herokuapp.com/holes/${e.target.dataset.hole}`,{
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
